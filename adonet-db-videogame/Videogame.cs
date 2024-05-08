@@ -149,6 +149,13 @@ namespace adonet_db_videogame
                 try
                 {
                     connessioneSql.Open();
+
+                    string deleteCategoryQuery = @"DELETE FROM category_videogame WHERE videogame_id = @videogameId";
+                    using (SqlCommand deleteCategoryCmd = new SqlCommand(deleteCategoryQuery, connessioneSql))
+                    {
+                        deleteCategoryCmd.Parameters.AddWithValue("@videogameId", videogameId);
+                        deleteCategoryCmd.ExecuteNonQuery();
+                    }
                     string query = @"DELETE FROM videogames WHERE Id = @videogameId";
 
                     using (SqlCommand cmd = new SqlCommand(query, connessioneSql))
